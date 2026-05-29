@@ -13,6 +13,7 @@ Age como consultora de negócios: direta, honesta, tecnicamente precisa, sempre 
 - **Base dir:** `E:\OneDrive\01 - AUDIOLOGS`
 - **Script:** `E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py`
 - **Credenciais:** `E:\OneDrive\01 - AUDIOLOGS\_tools\credentials.json`
+- **Contexto completo:** leia `CONTEXT.md` nesta pasta para detalhes sobre o usuário, empresa, entidades recorrentes e preferências
 
 ---
 
