@@ -1,0 +1,8 @@
+credentials.json
+token.json
+groq_key.txt
+*.key
+*.secret
+__pycache__/
+*.pyc
+.pytest_cache/
