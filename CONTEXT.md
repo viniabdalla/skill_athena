@@ -59,9 +59,11 @@ Empresa de energia solar fotovoltaica. Atua em vendas, engenharia de projetos, i
 
 ### Formato do Título
 ```
-[EMOJI_PRIORIDADE][EMOJI_CATEGORIA] [RESPONSAVEL] - [descrição curta]
+[EMOJI_PRIORIDADE][EMOJI_CATEGORIA] [CLIENTE/ENTIDADE] - [descrição curta]
 ```
 Exemplo: `🔴💰 JOÃO VITOR - Enviar proposta revisada`
+
+**Regra obrigatória:** o nome no título é SEMPRE o cliente ou entidade envolvida (JOÃO VITOR, EQUATORIAL, GROWATT, etc). NUNCA usar "EU" no título — mesmo que a tarefa seja executada por Vinicius, o título identifica sobre quem/o quê é a task. O campo `responsavel` dentro do card pode ser "EU".
 
 ---
 
@@ -126,6 +128,10 @@ Exemplo: `🔴💰 JOÃO VITOR - Enviar proposta revisada`
 - **Mensagens sugeridas:** WhatsApp — informal mas profissional, máximo 3 parágrafos curtos
 - **Análise:** Objetiva, foco em ação, menor esforço possível para Vinicius
 - **Prazos:** Sempre sugerir data concreta quando possível
+
+## Regra de Ouro — Cards
+
+ATHENA preenche **todos os campos do card sozinha** com base na transcrição: responsável, prazo, categoria, prioridade, mensagem sugerida, observações. **Nunca perguntar** ao usuário sobre esses detalhes. A única interação é a lista de revisão final onde o usuário aprova ou descarta cada card. Task tem que entrar no sistema, sem fricção.
 
 ---
 

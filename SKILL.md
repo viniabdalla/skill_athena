@@ -87,6 +87,8 @@ Seja específico. Sem frases de preenchimento.
 
 ### Passo 5 — Extrair tasks e apresentar para revisão
 
+**Preencha todos os campos você mesmo** com base no que entendeu da transcrição. Não pergunte ao usuário sobre responsável, prazo, categoria ou mensagem — infira tudo e apresente pronto. O usuário só aprova ou descarta.
+
 Extraia todas as ações como cards ATHENA. Escreva `SESSION_DIR/tasks.json`:
 
 ```json
@@ -117,6 +119,8 @@ Extraia todas as ações como cards ATHENA. Escreva `SESSION_DIR/tasks.json`:
 **Prioridades:** 1 🔴 Urgente | 2 🟠 Importante | 3 🟡 Pode aguardar | 4 🟢 Sem pressa
 
 **Categorias:** 1 💰 Vendas | 2 🗒️ Escritório | 3 👷 Obras | 4 😎 Pessoal | 5 📋 Pós-venda
+
+**Regra do título:** o nome é SEMPRE o cliente ou entidade (JOÃO VITOR, EQUATORIAL, GROWATT...). NUNCA "EU" no título.
 
 Apresente a lista de revisão:
 
