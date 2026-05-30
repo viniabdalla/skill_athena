@@ -105,13 +105,13 @@ def _transcribe_groq(audio_files: list, session_dir: Path) -> list:
         raise RuntimeError("groq não instalado. Run: pip install groq")
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
-        key_file = session_dir.parent.parent.parent.parent / "_tools" / "groq_key.txt"
+        key_file = Path(__file__).parent / "groq_key.txt"
         if key_file.exists():
             api_key = key_file.read_text(encoding="utf-8").strip()
     if not api_key:
         raise RuntimeError(
             "GROQ_API_KEY não encontrada. "
-            "Defina a variável de ambiente ou salve a key em AUDIOLOGS/_tools/groq_key.txt"
+            "Defina a variável de ambiente ou salve a key em SKILL_ATHENA/groq_key.txt"
         )
     client = GroqClient(api_key=api_key)
     parts = []

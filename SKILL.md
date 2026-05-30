@@ -10,9 +10,9 @@ Age como consultora de negócios: direta, honesta, tecnicamente precisa, sempre 
 
 ## Configuração
 
-- **Base dir:** `E:\OneDrive\01 - AUDIOLOGS`
-- **Script:** `E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py`
-- **Credenciais:** `E:\OneDrive\01 - AUDIOLOGS\_tools\credentials.json`
+- **Base dir:** `C:/Users/vinic/OneDrive/01 - AUDIOLOGS`
+- **Script:** `C:/Users/vinic/OneDrive/CLAUDE CLI/00 - SKILLS/SKILL_ATHENA/athena.py`
+- **Credenciais:** `C:/Users/vinic/OneDrive/CLAUDE CLI/00 - SKILLS/SKILL_ATHENA/credentials.json`
 - **Contexto completo:** leia `CONTEXT.md` nesta pasta para detalhes sobre o usuário, empresa, entidades recorrentes e preferências
 - **Agenda de contatos:** leia `CONTACTS.md` nesta pasta — sempre consulte antes de montar cards e atualize quando encontrar números novos
 
@@ -25,7 +25,7 @@ Age como consultora de negócios: direta, honesta, tecnicamente precisa, sempre 
 Varre a **pasta onde ATHENA foi ativada** (pasta atual), não a AUDIOLOGS. A sessão será sempre criada em AUDIOLOGS independente de onde for ativada.
 
 ```bash
-python "E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py" scan
+python "C:/Users/vinic/OneDrive/CLAUDE CLI/00 - SKILLS/SKILL_ATHENA/athena.py" scan
 ```
 
 - Output `NONE` → ir para **Modo Revisita**
@@ -44,11 +44,11 @@ Informe quantos áudios foram encontrados. Proponha um nome baseado no contexto 
 ### Passo 3 — Criar pasta, transcrever e mover arquivos
 
 ```bash
-python "E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py" transcribe --base-dir "E:\OneDrive\01 - AUDIOLOGS" --session-name "NOME_AQUI"
+python "C:/Users/vinic/OneDrive/CLAUDE CLI/00 - SKILLS/SKILL_ATHENA/athena.py" transcribe --base-dir "C:/Users/vinic/OneDrive/01 - AUDIOLOGS" --session-name "NOME_AQUI"
 ```
 
 O script:
-- Cria a sessão em `E:\OneDrive\01 - AUDIOLOGS\2026\...`
+- Cria a sessão em `C:/Users/vinic/OneDrive/01 - AUDIOLOGS\2026\...`
 - Move áudios para `SESSION_DIR/audios/` e transcreve
 - Move imagens para `SESSION_DIR/media/`
 - Imprime o caminho da sessão — guarde como `SESSION_DIR`
@@ -155,10 +155,10 @@ Quais enviar para o Google Tasks?
 Parse da resposta: `"todas"` = todos IDs | `"nenhuma"` = vazio | `"1 3 4"` = [1,3,4]
 
 ```bash
-python "E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py" push \
+python "C:/Users/vinic/OneDrive/CLAUDE CLI/00 - SKILLS/SKILL_ATHENA/athena.py" push \
   --session-dir "SESSION_DIR" \
   --approved "1,3,4" \
-  --creds "E:\OneDrive\01 - AUDIOLOGS\_tools\credentials.json"
+  --creds "C:/Users/vinic/OneDrive/CLAUDE CLI/00 - SKILLS/SKILL_ATHENA/credentials.json"
 ```
 
 Informe: `✅ N task(s) enviada(s) para o Google Tasks.`
@@ -171,7 +171,7 @@ Quando `scan` retorna `NONE`:
 
 1. Liste sessões recentes:
 ```bash
-python "E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py" list --base-dir "E:\OneDrive\01 - AUDIOLOGS"
+python "C:/Users/vinic/OneDrive/CLAUDE CLI/00 - SKILLS/SKILL_ATHENA/athena.py" list --base-dir "C:/Users/vinic/OneDrive/01 - AUDIOLOGS"
 ```
 
 2. Pergunte qual sessão revisitar.
