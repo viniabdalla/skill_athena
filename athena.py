@@ -16,6 +16,7 @@ MONTH_PT = {
 }
 
 AUDIO_EXTS = {".ogg", ".m4a", ".mp3", ".wav"}
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp", ".bmp", ".gif", ".tiff"}
 
 import os
 
@@ -44,11 +45,22 @@ GOOGLE_SCOPES = ["https://www.googleapis.com/auth/tasks"]
 # Session helpers
 # ---------------------------------------------------------------------------
 
+def find_loose_media(scan_dir: Path) -> dict:
+    """Return {'audio': [...], 'image': [...]} of media files in scan_dir root."""
+    audio, image = [], []
+    for f in scan_dir.iterdir():
+        if not f.is_file():
+            continue
+        ext = f.suffix.lower()
+        if ext in AUDIO_EXTS:
+            audio.append(f)
+        elif ext in IMAGE_EXTS:
+            image.append(f)
+    return {"audio": sorted(audio), "image": sorted(image)}
+
+
 def find_loose_audios(base_dir: Path) -> list:
-    return [
-        f for f in base_dir.iterdir()
-        if f.is_file() and f.suffix.lower() in AUDIO_EXTS
-    ]
+    return find_loose_media(base_dir)["audio"]
 
 
 def get_next_session_number(day_dir: Path) -> int:
@@ -113,6 +125,18 @@ def _transcribe_groq(audio_files: list, session_dir: Path) -> list:
             )
         parts.append((audio.name, result.strip() if isinstance(result, str) else result.text.strip()))
     return parts
+
+
+def move_images(image_files: list, session_dir: Path) -> list:
+    """Move image files into session_dir/media/ and return new paths."""
+    media_dir = session_dir / "media"
+    media_dir.mkdir(exist_ok=True)
+    moved = []
+    for img in image_files:
+        dest = media_dir / img.name
+        shutil.move(str(img), str(dest))
+        moved.append(dest)
+    return moved
 
 
 def transcribe_session(audio_files: list, session_dir: Path, engine: str = "whisper") -> Path:
@@ -197,22 +221,30 @@ def push_tasks(session_dir: Path, approved_ids: list, creds_path: Path) -> list:
 # ---------------------------------------------------------------------------
 
 def cmd_scan(args):
-    files = find_loose_audios(Path(args.base_dir))
-    if not files:
+    scan_dir = Path(args.scan_dir) if args.scan_dir else Path.cwd()
+    media = find_loose_media(scan_dir)
+    if not media["audio"] and not media["image"]:
         print("NONE")
-    else:
-        for f in files:
-            print(str(f))
+        return
+    for f in media["audio"]:
+        print(f"AUDIO\t{f}")
+    for f in media["image"]:
+        print(f"IMAGE\t{f}")
 
 
 def cmd_transcribe(args):
-    base = Path(args.base_dir)
-    files = find_loose_audios(base)
-    if not files:
-        print("ERROR: nenhum áudio encontrado em", base, file=sys.stderr)
+    scan_dir = Path(args.scan_dir) if args.scan_dir else Path.cwd()
+    base_dir = Path(args.base_dir)
+    media = find_loose_media(scan_dir)
+    if not media["audio"] and not media["image"]:
+        print("ERROR: nenhum arquivo encontrado em", scan_dir, file=sys.stderr)
         sys.exit(1)
-    session_dir = create_session_folder(base, args.session_name)
-    transcribe_session(files, session_dir, engine=args.engine)
+    session_dir = create_session_folder(base_dir, args.session_name)
+    if media["audio"]:
+        transcribe_session(media["audio"], session_dir, engine=args.engine)
+    if media["image"]:
+        moved = move_images(media["image"], session_dir)
+        print(f"IMAGES\t{len(moved)}\t{session_dir / 'media'}")
     print(str(session_dir))
 
 
@@ -247,10 +279,11 @@ if __name__ == "__main__":
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("scan")
-    p.add_argument("--base-dir", required=True)
+    p.add_argument("--scan-dir", default=None, help="Pasta a varrer (padrão: pasta atual)")
 
     p = sub.add_parser("transcribe")
-    p.add_argument("--base-dir", required=True)
+    p.add_argument("--scan-dir", default=None, help="Pasta de origem dos arquivos (padrão: pasta atual)")
+    p.add_argument("--base-dir", required=True, help="Base AUDIOLOGS onde a sessão será criada")
     p.add_argument("--session-name", required=True)
     p.add_argument("--engine", choices=["whisper", "groq"], default="groq")
 

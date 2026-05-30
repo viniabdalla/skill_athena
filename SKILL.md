@@ -21,12 +21,16 @@ Age como consultora de negócios: direta, honesta, tecnicamente precisa, sempre 
 
 ### Passo 1 — Detectar arquivos
 
+Varre a **pasta onde ATHENA foi ativada** (pasta atual), não a AUDIOLOGS. A sessão será sempre criada em AUDIOLOGS independente de onde for ativada.
+
 ```bash
-python "E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py" scan --base-dir "E:\OneDrive\01 - AUDIOLOGS"
+python "E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py" scan
 ```
 
 - Output `NONE` → ir para **Modo Revisita**
 - Output com arquivos → continuar Passo 2
+
+Suporta: áudios (`.ogg`, `.m4a`, `.mp3`, `.wav`) e imagens (`.jpg`, `.png`, `.heic`, `.webp`, etc.).
 
 ---
 
@@ -36,19 +40,25 @@ Informe quantos áudios foram encontrados. Proponha um nome baseado no contexto 
 
 ---
 
-### Passo 3 — Criar pasta e transcrever
+### Passo 3 — Criar pasta, transcrever e mover arquivos
 
 ```bash
 python "E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py" transcribe --base-dir "E:\OneDrive\01 - AUDIOLOGS" --session-name "NOME_AQUI"
 ```
 
-O script imprime o caminho da sessão criada — guarde como `SESSION_DIR`.
+O script:
+- Cria a sessão em `E:\OneDrive\01 - AUDIOLOGS\2026\...`
+- Move áudios para `SESSION_DIR/audios/` e transcreve
+- Move imagens para `SESSION_DIR/media/`
+- Imprime o caminho da sessão — guarde como `SESSION_DIR`
+
+**Se houver imagens:** leia cada uma com a ferramenta de visão e inclua o conteúdo visual na análise (Passo 4) — podem ser screenshots de conversa, documentos, fotos de obra, etc.
 
 ---
 
 ### Passo 4 — Analisar e escrever resumo.md
 
-Leia `SESSION_DIR/transcricao.md`.
+Leia `SESSION_DIR/transcricao.md` e, se houver arquivos em `SESSION_DIR/media/`, leia as imagens também. Consolide tudo na análise. Sempre escreva e exiba o resumo completo para o usuário.
 
 Escreva `SESSION_DIR/resumo.md` com esta estrutura **exata**:
 
