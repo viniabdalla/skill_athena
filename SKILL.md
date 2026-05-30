@@ -57,6 +57,23 @@ O script:
 
 ---
 
+### Passo 3.5 — Corrigir erros de transcrição
+
+Após gerar `transcricao.md`, leia o arquivo inteiro e corrija silenciosamente os erros típicos do Groq com áudio em português antes de prosseguir para a análise. **Não pergunte ao usuário — aplique as correções diretamente.**
+
+Padrões a detectar e corrigir:
+
+- **Nomes próprios inventados** — Groq ouve sílabas em português e transcreve como nomes/sobrenomes estrangeiros (ex: "Langevin", "MyEA", "Evine"). Corrija para o que faz sentido no contexto.
+- **Palavras inexistentes** — resultado de fusão ou separação errada de sílabas (ex: "estelha" → "telha", "escolar" → "escorar"). Corrija para a palavra real mais próxima.
+- **Repetições de gagueira** — o Groq transcreve literalmente hesitações do falante (ex: "eu consigo eu consigo"). Mantenha apenas uma ocorrência.
+- **Artigo + palavra fundidos** — ex: "atirada a estelha" → "retirada a telha", onde o artigo foi absorvido pela palavra anterior.
+- **Siglas ou abreviações mal ouvidas** — ex: "MyEA" quando o falante disse "minha IA".
+- **Despedidas ou frases curtas corrompidas** — ex: "Nada do Langevin, é uma disponha" → "De nada, dona Joana, disponha."
+
+Após aplicar as correções, continue para o Passo 4 sem mencionar cada ajuste individualmente — apenas prossiga.
+
+---
+
 ### Passo 4 — Analisar e escrever resumo.md
 
 Leia `SESSION_DIR/transcricao.md` e, se houver arquivos em `SESSION_DIR/media/`, leia as imagens também. Consolide tudo na análise. Sempre escreva e exiba o resumo completo para o usuário.
