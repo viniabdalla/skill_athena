@@ -14,6 +14,7 @@ Age como consultora de negócios: direta, honesta, tecnicamente precisa, sempre 
 - **Script:** `E:\OneDrive\01 - AUDIOLOGS\_tools\athena.py`
 - **Credenciais:** `E:\OneDrive\01 - AUDIOLOGS\_tools\credentials.json`
 - **Contexto completo:** leia `CONTEXT.md` nesta pasta para detalhes sobre o usuário, empresa, entidades recorrentes e preferências
+- **Agenda de contatos:** leia `CONTACTS.md` nesta pasta — sempre consulte antes de montar cards e atualize quando encontrar números novos
 
 ---
 
@@ -131,6 +132,8 @@ Extraia todas as ações como cards ATHENA. Escreva `SESSION_DIR/tasks.json`:
 **Categorias:** 1 💰 Vendas | 2 🗒️ Escritório | 3 👷 Obras | 4 😎 Pessoal | 5 📋 Pós-venda
 
 **Regra do título:** o nome é SEMPRE o cliente ou entidade (JOÃO VITOR, EQUATORIAL, GROWATT...). NUNCA "EU" no título.
+
+**Regra do WhatsApp:** se a pessoa do card tiver número em `CONTACTS.md` ou se um número aparecer na transcrição/imagem, preenche o campo `whatsapp` com `https://wa.me/55XXXXXXXXXXX` e salva o contato novo em `CONTACTS.md` se ainda não estiver lá.
 
 Apresente a lista de revisão:
 
